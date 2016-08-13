@@ -5,7 +5,8 @@ In chapter 6 of Eloquent JavaScript(https://github.com/marijnh/Eloquent-JavaScri
 Before getting started I recommend watching there videos.
 [`Map`](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&index=2&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84),
 [`reduce`](https://www.youtube.com/watch?v=1DMolJ2FrNY&index=4&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) by [mpjme](https://twitter.com/mpjme?lang=en)
-[Object-Oriented JavaScript](https://www.youtube.com/watch?v=PMfcsYzj-9M) by [James Shore](https://twitter.com/jamesshore)
+
+And [Object-Oriented JavaScript](https://www.youtube.com/watch?v=PMfcsYzj-9M) by [James Shore](https://twitter.com/jamesshore)
 
 
 Our goal is making a table like this

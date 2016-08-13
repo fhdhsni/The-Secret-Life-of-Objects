@@ -4,7 +4,7 @@ In chapter 6 of [Eloquent JavaScript](https://github.com/marijnh/Eloquent-JavaSc
 
 Before getting started I recommend watching these videos.
 [`Map`](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&index=2&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84),
-[`reduce`](https://www.youtube.com/watch?v=1DMolJ2FrNY&index=4&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84), [Object-Oriented JavaScript](https://www.youtube.com/watch?v=PMfcsYzj-9M) by [mpjme](https://twitter.com/mpjme?lang=en) and [James Shore](https://twitter.com/jamesshore)
+[`reduce`](https://www.youtube.com/watch?v=1DMolJ2FrNY&index=4&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) and [Object-Oriented JavaScript](https://www.youtube.com/watch?v=PMfcsYzj-9M) by [mpjme](https://twitter.com/mpjme?lang=en) and [James Shore](https://twitter.com/jamesshore)
 
 
 Our goal is making a table like this

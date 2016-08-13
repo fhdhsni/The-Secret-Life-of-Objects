@@ -1,6 +1,6 @@
 # The-Secret-Life-of-Objects
 
-In chapter 6 of Eloquent JavaScript(https://github.com/marijnh/Eloquent-JavaScript) there is an example that was hard for me to understand. So with this repo I hope to make it easier for newbies like myself to understand it.
+In chapter 6 of [Eloquent JavaScript](https://github.com/marijnh/Eloquent-JavaScript) there is an example that was hard for me to understand. So with this repo I hope to make it easier for newbies like myself to understand it.
 
 Before getting started I recommend watching there videos.
 [`Map`](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&index=2&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84),
@@ -48,6 +48,7 @@ This is the entire program that does this.
       }, 0);
     });
   }
+
   function colWidths(rows) {
     return rows[0].map(function(_, i) {
       return rows.reduce(function(max, row) {
@@ -55,6 +56,7 @@ This is the entire program that does this.
       }, 0);
     });
   }
+
   function drawTable(rows) {
     var heights = rowHeights(rows);
     var widths = colWidths(rows);
@@ -72,25 +74,31 @@ This is the entire program that does this.
         return drawLine(blocks, lineNo);
       }).join("\n");
     }
+
     return rows.map(drawRow).join("\n");
   }
+
   function repeat(string, times) {
     var result = "";
     for (var i = 0; i < times; i++)
       result += string;
     return result;
   }
+
   function TextCell(text) {
     this.text = text.split("\n");
   }
+
   TextCell.prototype.minWidth = function() {
     return this.text.reduce(function(width, line) {
       return Math.max(width, line.length);
     }, 0);
   };
+
   TextCell.prototype.minHeight = function() {
     return this.text.length;
   };
+
   TextCell.prototype.draw = function(width, height) {
     var result = [];
     for (var i = 0; i < height; i++) {
@@ -99,18 +107,23 @@ This is the entire program that does this.
     }
     return result;
   };
+
   function UnderlinedCell(inner) {
     this.inner = inner;
   }
+
   UnderlinedCell.prototype.minWidth = function() {
     return this.inner.minWidth();
   };
+
   UnderlinedCell.prototype.minHeight = function() {
     return this.inner.minHeight() + 1;
   };
+
   UnderlinedCell.prototype.draw = function(width, height) {
     return this.inner.draw(width, height - 1).concat([repeat("-", width)]);
   };
+
   function dataTable(data) {
     var keys = Object.keys(data[0]);
     var headers = keys.map(function(name) {
@@ -127,10 +140,13 @@ This is the entire program that does this.
     });
     return [headers].concat(body);
   }
+
   function RTextCell(text) {
     TextCell.call(this, text);
   }
+
   RTextCell.prototype = Object.create(TextCell.prototype);
+
   RTextCell.prototype.draw = function(width, height) {
     var result = [];
     for (var i = 0; i < height; i++) {
@@ -139,6 +155,7 @@ This is the entire program that does this.
     }
     return result;
   };
+
   console.log(drawTable(dataTable(MOUNTAINS)));
 ```
 
@@ -420,11 +437,11 @@ In our table we have three columns. We need to know how wide each column should 
 
 `colWidths` needs to know how many columns we have so it maps through `rows[0]` to use its index parameter `i`. And `i` of course gonna be `0`, `1`, `2` becuase we have three objects/cells in each `row`. Again we use `reduce` to go through all `rows` and check `width` of their `i` cell. At the end we have this `[ 12, 6, 13 ]` an array of three number.
 
-`12` for the first column because `"Popocatepetl".length` is 12.
+`12` for the first column because `"Popocatepetl".length` is `12`.
 
-`6`  for the second column because `"height".length` is 6.
+`6`  for the second column because `"height".length` is `6`.
 
-`13` for thrid column becuase `"United States".length` is 13.
+`13` for thrid column becuase `"United States".length` is `13`.
 
 Getting back to our `drawTable` function, it returns this
 
@@ -442,7 +459,7 @@ It maps through `rows` and passes each `row` to `drawRow` function. Therefore fo
       return drawLine(blocks, lineNo);
     }).join("\n");
 ```
-As you can see it takes a `row` (for each invocation) and the corresponding `rowNum`. 
+As you can see it takes a `row` (for each invocation) its the corresponding `rowNum`. 
 For each `row`, `drawRow` returns a string. For example for the second `row` which is this
 
 ``` javascript
@@ -501,7 +518,9 @@ It makes
 And then it uses `join(" ")` to make a string by joining all the elements of this array with one space in between.
 At the end `drawLine` returns `"Kilimanjaro....5895.Tanzania....."`, again I replaced spaces with `.`.
 
-`lineNo` is always `0` except for header. When `rowNum` is `0` (so we are working on header) `blocks[0]` is `[ 'name........', '------------' ]` so `lineNo` can be `0` and `1`. Therefore for header this function will be invoked twice. Once with `lineNo` of `0` another with `lineNo` of `1`. In turns two separate line will be generated. One for headers (that is `name`, `height` and `country`) and another for those dashes.
+`lineNo` is always `0` except for header. 
+When `rowNum` is `0` (so we are working on header) `blocks[0]` is `[ 'name........', '------------' ]` so `lineNo` can be `0` and `1`. Therefore for header this function will be invoked twice. Once with `lineNo` of `0` another with `lineNo` of `1`. 
+In turn two separate line will be generated. One for headers (that is `name`, `height` and `country`) and another for those dashes.
 
 Now that we know what `drawLine` does we can continue with `drawRow` function.
 
@@ -549,7 +568,7 @@ This is the array that `rows.map(drawRow)` returns
   'Denali         6168 United States',
   'Popocatepetl   5465 Mexico       ' ]
 ```
-And for the last time we use `join("\n")` to make a string out of this array. And that it, we got our table.
+And for the last time we use `join("\n")` to make a string out of this array. And that's it, we got our table.
 ```
 name         height country      
 ------------ ------ -------------

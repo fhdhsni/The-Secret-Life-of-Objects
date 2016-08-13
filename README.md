@@ -519,6 +519,7 @@ And then it uses `join(" ")` to make a string by joining all the elements of thi
 At the end `drawLine` returns `"Kilimanjaro....5895.Tanzania....."`, again I replaced spaces with `.`.
 
 `lineNo` is always `0` except for header. 
+
 When `rowNum` is `0` (so we are working on header) `blocks[0]` is `[ 'name........', '------------' ]` so `lineNo` can be `0` and `1`. Therefore for header this function will be invoked twice. Once with `lineNo` of `0` another with `lineNo` of `1`. 
 In turn two separate line will be generated. One for headers (that is `name`, `height` and `country`) and another for those dashes.
 

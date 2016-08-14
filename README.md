@@ -1,6 +1,6 @@
 # The-Secret-Life-of-Objects
 
-In chapter 6 of [Eloquent JavaScript](https://github.com/marijnh/Eloquent-JavaScript) there is an example that was hard for me to understand. So with this repo I hope to make it easier for newbies like myself to understand it.
+In chapter 6 of [Eloquent JavaScript](https://github.com/marijnh/Eloquent-JavaScript) there is an example that was hard for me to understand. So with this repo, I hope to make it easier for newbies like myself to understand it.
 
 Before getting started I recommend watching these videos.
 [`Map`](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&index=2&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84),
@@ -209,7 +209,7 @@ Our objects are constructed with two constructors `TextCell` and `UnderlinedCell
 ```
 `String.prototype.split` returns an array of strings. so `this.text` is an array, something like `["country"]`
 
-`TextCell` is a constructor therefore it implicitly returns `this`. 
+`TextCell` is a constructor, therefore, it implicitly returns `this`. 
 
 ``` javascript
   TextCell.prototype.minWidth = function() {
@@ -233,23 +233,23 @@ Our objects are constructed with two constructors `TextCell` and `UnderlinedCell
 ```
 Each instance of `TextCell` (which indicates a cell in our final table) inherits these methods. 
 
-`minWidth()` returns a number indicating minimum width of (in characters) its cell. It uses `reduce` on `this.text` in case `this.text` has more than one element (more than one line) which in our example it never does.
+`minWidth()` returns a number indicating the minimum width of (in characters) its cell. It uses `reduce` on `this.text` in case `this.text` has more than one element (more than one line) which in our example it never does.
 
 `minHeight()` returns a number indicating the minimum height that its cell requires (in lines). In our example it's always 1. number of elements in `this.text` indicates the minimum height that a given cell needs.
 
-We use `draw()` to tell a cell to draw itself. It takes two parameter `width` and `height` and returns an array. something like `[ 'Kilimanjaro ' ]`
+We use `draw()` to tell a cell to draw itself. It takes two parameters `width` and `height` and returns an array. something like `[ 'Kilimanjaro ' ]`
 
-`width` is maximum width of a particular column that our cell is going reside in. We need this to add extra spaces in order to make our cells in a column aligned with each other.
+`width` is the maximum width of a particular column that our cell is going reside in. We need this to add extra spaces in order to make our cells in a column aligned with each other.
 
-`height` is height of a particular row. If a cell should, say takes two line, height will be 2. In our example it's always 1. Remember underlined cells of header uses a slightly different version of `draw()`. We'll see it in a moment.
+`height` is the height of a particular row. If a cell should, say takes two line, height will be 2. In our example, it's always 1. Remember underlined cells of header uses a slightly different version of `draw()`. We'll see it in a moment.
 
-We go through body of loop `height` times.
+We go through the body of loop `height` times.
 
-It adds those extra spaces with help of `repeat` function. `repeat` function takes a string and a number and it returns the given string concatenated with itself number of times. e.g. `repeat("bat! ", 3)` returns `"bat! bat! bat! "`.
+It adds those extra spaces with the help of `repeat` function. `repeat` function takes a string and a number and it returns the given string concatenated with itself number of times. e.g. `repeat("bat! ", 3)` returns `"bat! bat! bat! "`.
 
-We figure out how many extra spaces we should add with subtracting length of widest cell in our column (`width`) from length of current cell that we are drawing (`line.length`). e.g: `kilimanjaro` with the `length` of 11 belongs to first column. The widest cell in the first column is `"Popocatepetl"` with the `length` of 12. So we only need one space after `kilimanjaro`. `result` will be `[ 'Kilimanjaro ' ]`.
+We figure out how many extra spaces we should add with subtracting length of the widest cell in our column (`width`) from length of current cell that we are drawing (`line.length`). e.g: `kilimanjaro` with the `length` of 11 belongs to the first column. The widest cell in the first column is `"Popocatepetl"` with the `length` of 12. So we only need one space after `kilimanjaro`. `result` will be `[ 'Kilimanjaro ' ]`.
 
-We're not done with constructors just yet. `TextCell` will be used for regular cells. For underlined cell (that is headers) we have another constructor `UnderlinedCell`. Fortunately it inherits most of the goodies from `TextCell`.
+We're not done with constructors just yet. `TextCell` will be used for regular cells. For underlined cell (that is headers) we have another constructor `UnderlinedCell`. Fortunately, it inherits most of the goodies from `TextCell`.
 
 ``` javascript
   function UnderlinedCell(inner) {
@@ -269,13 +269,13 @@ We're not done with constructors just yet. `TextCell` will be used for regular c
 ```
 Something that you shouldn't forget about `UnderlinedCell` is that it takes `TextCell` objects as its argument so `inner` is a `TextCell` object.
 
-`UnderlinedCell.prototype.minHeight` adds 1 to the `height` of cell because of dashes under headers that take one extra line more than regular `TextCell` cells.
+`UnderlinedCell.prototype.minHeight` adds 1 to the `height` of the cell because of dashes under headers that take one extra line more than regular `TextCell` cells.
 ```
 name         height country      
 ------------ ------ -------------
 ```
 
-Also for `draw()` method we should consider that extra line. We send `height - 1` to `TextCell.prototype.draw` (because we don't want to add a bare empty line with second evaluation of its loop) but we `concate` the returned array from `TextCell.prototype.draw` (remember `draw` returns an array) with `[repeat("-", width)]`. Let's imagine we wanna draw `name` cell. It's in the first column. The widest cell in first column is `"popocatepetl"` with the `length` of 12 therefore `width` is 12. And height is 2 because `UnderlinedCell.prototype.minHeight` returns 2. With the help of `[repeat("-", 12)]` we get the appropriate underline which is this `['------------']`.
+Also for `draw()` method we should consider that extra line. We send `height - 1` to `TextCell.prototype.draw` (because we don't want to add a bare empty line with second evaluation of its loop) but we `concate` the returned array from `TextCell.prototype.draw` (remember `draw` returns an array) with `[repeat("-", width)]`. Let's imagine we wanna draw `name` cell. It's in the first column. The widest cell in the first column is `"popocatepetl"` with the `length` of 12 therefore `width` is 12. And height is 2 because `UnderlinedCell.prototype.minHeight` returns 2. With the help of `[repeat("-", 12)]` we get the appropriate underline which is this `['------------']`.
 After concatenation, what actually `UnderlinedCell.prototype.draw` returns for `name` cell is this:
 
 ``` javascript
@@ -306,7 +306,7 @@ function dataTable(data) {
 }
 ```
 It's time to examine how `body` of our table gets created.
-`body` is an array with 7 elements each element is an array (containing three `TextCell` objs) that makes one `row` of our table, something like:
+`body` is an array with 7 elements each element is an array (containing three `TextCell` objects) that makes one `row` of our table, something like:
 ``` 
   [
     TextCell { text: [ 'Kilimanjaro' ] },
@@ -316,7 +316,7 @@ It's time to examine how `body` of our table gets created.
 ```
 For each invocation of `map`, `row` is something like this: `{name: "Kilimanjaro", height: 5895, country: "Tanzania"}`.
 
-For each `row` we `map` through our `keys` to get the `value` for each key. Then we examine the `value` to see if it's a `"number"` or not. We do that becuase we want numbers to be aligned to the right of their cells.
+For each `row` we `map` through our `keys` to get the `value` for each key. Then we examine the `value` to see if it's a `"number"` or not. We do that because we want numbers to be aligned to the right of their cells.
 If `value` is a number we pass it to `RTextCell` constructor which is a slight variation of `TextCell` constructor.
 
 ``` javascript
@@ -339,14 +339,14 @@ It inherits everything from `TextCell` except for `draw`. And as you can see the
 ``` javascript
 result.push(repeat(" ", width - line.length) + line);
 ```
-It puts those extra spaces before `line` instead of after it. So the result will be sth like `[ '..5895' ]` (I used `.` instead of space becauce github removes extra spaces.) Notice we have two extra space before the number.
+It puts those extra spaces before `line` instead of after it. So the result will be sth like `[ '..5895' ]` (I used `.` instead of space because GitHub removes extra spaces.) Notice we have two extra space before the number.
 
 Getting back to our `dataTable` function, its last line is :
 
 ``` javascript
 return [headers].concat(body);
 ```
-By concatenating `[headers]` with `body` we get an array of 8 elements. One element for our `headers` and the rest of them for `body`. Each element which an array of three objects represents a `row` in the finale table.
+By concatenating `[headers]` with `body` we get an array of 8 elements. One element for our `headers` and the rest of them for `body`. Each element which an array of three objects represents a `row` in the final table.
 
 Phew! We are finally done with `dataTable` function. Remember everything started with this line.
 
@@ -433,20 +433,20 @@ function colWidths(rows) {
 ```
 In our table we have three columns. We need to know how wide each column should be in order to make straight columns. we give `width` of each column to `draw` method of our cells to tell them our many extra space they should add to themselves. To find out `width` of each column we use `colWidths` function.
 
-`colWidths` needs to know how many columns we have so it maps through `rows[0]` to use its index parameter `i`. And `i` of course gonna be `0`, `1`, `2` becuase we have three objects/cells in each `row`. Again we use `reduce` to go through all `rows` and check `width` of their `i` cell. At the end we have this `[ 12, 6, 13 ]` an array of three number.
+`colWidths` needs to know how many columns we have so it maps through `rows[0]` to use its index parameter `i`. And `i` of course gonna be `0`, `1`, `2` because we have three objects/cells in each `row`. Again we use `reduce` to go through all `rows` and check `width` of their `i` cell. At the end we have this `[ 12, 6, 13 ]` an array of three number.
 
 `12` for the first column because `"Popocatepetl".length` is `12`.
 
 `6`  for the second column because `"height".length` is `6`.
 
-`13` for thrid column becuase `"United States".length` is `13`.
+`13` for the the third column because `"United States".length` is `13`.
 
 Getting back to our `drawTable` function, it returns this
 
 ``` javascript
   return rows.map(drawRow).join("\n");
 ```
-It maps through `rows` and passes each `row` to `drawRow` function. Therefore for each invocation of `drawRow` we pass it a `row`. Let's take a look at this function and see how it works.
+It maps through `rows` and passes each `row` to `drawRow` function. Therefore for each invocation of `drawRow`, we pass it a `row`. Let's take a look at this function and see how it works.
 
 ``` javascript
   function drawRow(row, rowNum) {
@@ -468,9 +468,9 @@ For each `row`, `drawRow` returns a string. For example for the second `row` whi
   ]
 ```
 
-It returns `"Kilimanjaro....5895.Tanzania....."` I replaced spaces with `.` to make it visually more clear.
+It returns `"Kilimanjaro....5895.Tanzania....."` I replaced spaces with `.` to make it visually clearer.
 
-`blocks` is an array of arrays. Each inner array will be a cell in finale table. 
+`blocks` is an array of arrays. Each inner array will be a cell in the final table. 
 For e.g if `rowNum == 0` (so it's our header) blocks is.
 
 ``` javascript
@@ -516,10 +516,10 @@ It makes
 And then it uses `join(" ")` to make a string by joining all the elements of this array with one space in between.
 At the end `drawLine` returns `"Kilimanjaro....5895.Tanzania....."`, again I replaced spaces with `.`.
 
-`lineNo` is always `0` except for header. 
+`lineNo` is always `0` except for the header. 
 
-When `rowNum` is `0` (so we are working on header) `blocks[0]` is `[ 'name........', '------------' ]` so `lineNo` can be `0` and `1`. Therefore for header this function will be invoked twice. Once with `lineNo` of `0` another with `lineNo` of `1`. 
-In turn two separate line will be generated. One for headers (that is `name`, `height` and `country`) and another for those dashes.
+When `rowNum` is `0` (so we are working on header) `blocks[0]` is `[ 'name........', '------------' ]` so `lineNo` can be `0` and `1`. Therefore for the header, this function will be invoked twice. Once with `lineNo` of `0` another with `lineNo` of `1`. 
+In turn, two separate line will be generated. One for headers (that is `name`, `height` and `country`) and another for those dashes.
 
 Now that we know what `drawLine` does we can continue with `drawRow` function.
 
@@ -528,7 +528,7 @@ Now that we know what `drawLine` does we can continue with `drawRow` function.
       return drawLine(blocks, lineNo);
     }).join("\n");
 ```
-Actually there's not much to continue. `drawLine` returns a string to the `map` and `map` returns an array. This array has one or two elements depend on the `row` that we are working on. If it's the header it has two elements.
+Actually, there's not much to continue. `drawLine` returns a string to the `map` and `map` returns an array. This array has one or two elements depend on the `row` that we are working on. If it's the header it has two elements.
 
 ``` javascript
 [ 'name         height country      ',
@@ -539,7 +539,7 @@ And for all the other rows it has one element something like this:
 ``` javascript
 [ 'Kilimanjaro    5895 Tanzania     ' ]
 ```
-Notice it's stil an array but what we want is a string. So again we use `join("\n")` but this time with line feed as its separator.
+Notice it's still an array but what we want is a string. So again we use `join("\n")` but this time with line feed as its separator.
 So to make it more clear, this is what we get for header (first `row`):
 
 ```
@@ -550,7 +550,7 @@ and for the second `row` we get:
 ```
 "Kilimanjaro    5895 Tanzania     "
 ```
-This process wil be repeated for each `row`, remember `drawRow` is in a `map`
+This process will be repeated for each `row`, remember `drawRow` is in a `map` method.
 
 ``` javascript
   return rows.map(drawRow).join("\n");

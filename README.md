@@ -1,4 +1,4 @@
-# The-Secret-Life-of-Objects
+# The Secret Life of Objects
 
 In [chapter 6](http://eloquentjavascript.net/06_object.html) of [Eloquent JavaScript](https://github.com/marijnh/Eloquent-JavaScript) there is an example that was hard for me to understand. So with this repo, I hope to make it easier for newbies like myself to understand it.
 
